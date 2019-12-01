@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import csv
 from time import time
 
 NAME_PATH = 'p022_names.txt'
