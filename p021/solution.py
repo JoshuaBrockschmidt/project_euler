@@ -3,7 +3,7 @@
 from time import time
 
 def sum_amicable_nums(n):
-    # Calculate the sum of properr divisors for all numbers [1, n).
+    # Calculate the sum of proper divisors for all numbers [1, n).
     upper_bound = n
     prop_sums = []
     i = 1
