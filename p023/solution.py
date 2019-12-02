@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
+import numpy as np
 from time import time
 
 ABU_LIMIT = 28123
 
 def sum_nonabundant_sums():
+    not_sums = np.arange(0, ABU_LIMIT)
+
     # Find all abundant numbers.
     abun = []
     prop_sums = []
@@ -19,32 +22,16 @@ def sum_nonabundant_sums():
                     div_sum += d + int(i / d)
         if div_sum > i:
             abun.append(i)
+            for a in abun:
+                sum_two = a + i
+                if sum_two < len(not_sums):
+                    not_sums[sum_two] = 0
+                else:
+                    break
 
     # Calculate sum of all positive integers which cannot be written as the sum
     # of two abundant numbers.
-    total = 0
-    for i in range(1, 28123):
-        if i % 1000 == 0:
-            print(i, total)
-        is_abun_sum = False
-        lims = [0 for _ in range(len(abun))]
-        for j, n in enumerate(abun):
-            if n > i:
-                break
-            for k in range(max(j, lims[j]), len(abun)):
-                m = abun[k]
-                abun_sum = n + m
-                if abun_sum > i:
-                    lims[j] = k - 1
-                    break
-                elif abun_sum == i:
-                    is_abun_sum = True
-                    break
-            if is_abun_sum:
-                break
-        if not is_abun_sum:
-            total += i
-    return total
+    return np.sum(not_sums)
 
 if __name__ == '__main__':
     start = time()
